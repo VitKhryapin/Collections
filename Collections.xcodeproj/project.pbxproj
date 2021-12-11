@@ -9,12 +9,15 @@
 /* Begin PBXBuildFile section */
 		FBD7154527634435003EEC79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7154427634435003EEC79 /* AppDelegate.swift */; };
 		FBD7154727634435003EEC79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7154627634435003EEC79 /* SceneDelegate.swift */; };
-		FBD7154927634435003EEC79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7154827634435003EEC79 /* ViewController.swift */; };
 		FBD7154C27634435003EEC79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD7154A27634435003EEC79 /* Main.storyboard */; };
 		FBD7154E27634436003EEC79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBD7154D27634436003EEC79 /* Assets.xcassets */; };
 		FBD7155127634436003EEC79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBD7154F27634436003EEC79 /* LaunchScreen.storyboard */; };
 		FBD7155C27634436003EEC79 /* CollectionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7155B27634436003EEC79 /* CollectionsTests.swift */; };
 		FBD7156727634436003EEC79 /* CollectionsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7156627634436003EEC79 /* CollectionsUITests.swift */; };
+		FBD715752763478A003EEC79 /* CollectionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD715742763478A003EEC79 /* CollectionsTableViewController.swift */; };
+		FBD715772763616D003EEC79 /* ArrayCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */; };
+		FBD71579276374E3003EEC79 /* FirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */; };
+		FBD7157B276375F8003EEC79 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +41,6 @@
 		FBD7154127634435003EEC79 /* Collections.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collections.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD7154427634435003EEC79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FBD7154627634435003EEC79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		FBD7154827634435003EEC79 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FBD7154B27634435003EEC79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FBD7154D27634436003EEC79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FBD7155027634436003EEC79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,10 @@
 		FBD7156227634436003EEC79 /* CollectionsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CollectionsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBD7156627634436003EEC79 /* CollectionsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsUITests.swift; sourceTree = "<group>"; };
 		FBD7156827634436003EEC79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBD715742763478A003EEC79 /* CollectionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTableViewController.swift; sourceTree = "<group>"; };
+		FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayCollectionViewController.swift; sourceTree = "<group>"; };
+		FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +107,14 @@
 			children = (
 				FBD7154427634435003EEC79 /* AppDelegate.swift */,
 				FBD7154627634435003EEC79 /* SceneDelegate.swift */,
-				FBD7154827634435003EEC79 /* ViewController.swift */,
-				FBD7154A27634435003EEC79 /* Main.storyboard */,
-				FBD7154D27634436003EEC79 /* Assets.xcassets */,
 				FBD7154F27634436003EEC79 /* LaunchScreen.storyboard */,
 				FBD7155227634436003EEC79 /* Info.plist */,
+				FBD7154D27634436003EEC79 /* Assets.xcassets */,
+				FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */,
+				FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */,
+				FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */,
+				FBD715742763478A003EEC79 /* CollectionsTableViewController.swift */,
+				FBD7154A27634435003EEC79 /* Main.storyboard */,
 			);
 			path = Collections;
 			sourceTree = "<group>";
@@ -258,7 +267,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBD7154927634435003EEC79 /* ViewController.swift in Sources */,
+				FBD71579276374E3003EEC79 /* FirstCollectionViewCell.swift in Sources */,
+				FBD715772763616D003EEC79 /* ArrayCollectionViewController.swift in Sources */,
+				FBD715752763478A003EEC79 /* CollectionsTableViewController.swift in Sources */,
+				FBD7157B276375F8003EEC79 /* OtherCollectionViewCell.swift in Sources */,
 				FBD7154527634435003EEC79 /* AppDelegate.swift in Sources */,
 				FBD7154727634435003EEC79 /* SceneDelegate.swift in Sources */,
 			);

@@ -63,7 +63,7 @@
         <scene sceneID="TMf-av-VER">
             <objects>
                 <collectionViewController storyboardIdentifier="ArrayCollectionViewController" id="HCs-Fh-oSe" customClass="ArrayCollectionViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MNB-dQ-r8F">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" id="MNB-dQ-r8F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -87,16 +87,25 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aeM-8H-9Fq">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                        </activityIndicatorView>
                                     </subviews>
+                                    <color key="backgroundColor" systemColor="systemGray4Color"/>
                                     <constraints>
                                         <constraint firstItem="tpl-Hv-i7s" firstAttribute="leading" secondItem="eOS-kf-lqD" secondAttribute="leading" id="08P-8A-coZ"/>
                                         <constraint firstItem="tpl-Hv-i7s" firstAttribute="top" secondItem="eOS-kf-lqD" secondAttribute="top" id="26D-a8-rHT"/>
                                         <constraint firstAttribute="trailing" secondItem="tpl-Hv-i7s" secondAttribute="trailing" id="DeX-Hu-CFd"/>
+                                        <constraint firstItem="aeM-8H-9Fq" firstAttribute="leading" secondItem="eOS-kf-lqD" secondAttribute="leading" id="bRP-us-vUA"/>
+                                        <constraint firstAttribute="bottom" secondItem="aeM-8H-9Fq" secondAttribute="bottom" id="eJ8-H1-DY2"/>
+                                        <constraint firstItem="aeM-8H-9Fq" firstAttribute="top" secondItem="eOS-kf-lqD" secondAttribute="top" id="k6s-hy-wWE"/>
                                         <constraint firstAttribute="bottom" secondItem="tpl-Hv-i7s" secondAttribute="bottom" id="oXA-l5-wEc"/>
+                                        <constraint firstAttribute="trailing" secondItem="aeM-8H-9Fq" secondAttribute="trailing" id="wuv-f7-HF5"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="414" height="128"/>
                                 <connections>
+                                    <outlet property="activityIndicator" destination="aeM-8H-9Fq" id="Y0d-Gn-7EJ"/>
                                     <outlet property="firstLabelOutlet" destination="tpl-Hv-i7s" id="RNH-BL-37Y"/>
                                 </connections>
                             </collectionViewCell>
@@ -107,7 +116,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-xe-kom">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWZ-xe-kom">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -121,6 +130,7 @@
                                         <constraint firstItem="nWZ-xe-kom" firstAttribute="leading" secondItem="qpz-33-dEh" secondAttribute="leading" id="qx8-w1-JlJ"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <connections>
                                     <outlet property="otherLabel" destination="nWZ-xe-kom" id="Vm0-oz-cGm"/>
                                 </connections>
@@ -159,6 +169,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

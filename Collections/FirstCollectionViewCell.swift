@@ -11,6 +11,8 @@ class FirstCollectionViewCell: UICollectionViewCell {
    
     @IBOutlet weak var firstLabelOutlet: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     
     
     

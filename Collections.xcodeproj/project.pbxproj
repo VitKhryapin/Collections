@@ -18,6 +18,7 @@
 		FBD715772763616D003EEC79 /* ArrayCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */; };
 		FBD71579276374E3003EEC79 /* FirstCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */; };
 		FBD7157B276375F8003EEC79 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */; };
+		FBD7157D2764908C003EEC79 /* ArrayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7157C2764908C003EEC79 /* ArrayCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayCollectionViewController.swift; sourceTree = "<group>"; };
 		FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstCollectionViewCell.swift; sourceTree = "<group>"; };
 		FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
+		FBD7157C2764908C003EEC79 /* ArrayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				FBD71578276374E3003EEC79 /* FirstCollectionViewCell.swift */,
 				FBD7157A276375F8003EEC79 /* OtherCollectionViewCell.swift */,
 				FBD715762763616D003EEC79 /* ArrayCollectionViewController.swift */,
+				FBD7157C2764908C003EEC79 /* ArrayCell.swift */,
 				FBD715742763478A003EEC79 /* CollectionsTableViewController.swift */,
 				FBD7154A27634435003EEC79 /* Main.storyboard */,
 			);
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FBD71579276374E3003EEC79 /* FirstCollectionViewCell.swift in Sources */,
+				FBD7157D2764908C003EEC79 /* ArrayCell.swift in Sources */,
 				FBD715772763616D003EEC79 /* ArrayCollectionViewController.swift in Sources */,
 				FBD715752763478A003EEC79 /* CollectionsTableViewController.swift in Sources */,
 				FBD7157B276375F8003EEC79 /* OtherCollectionViewCell.swift in Sources */,

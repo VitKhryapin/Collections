@@ -15,19 +15,19 @@ class ArrayCollectionViewController: UICollectionViewController {
     var result: String = "Create Int array with 10_000_000 elements"
     var array: Array<Any> = []
     var arrayCell: ArrayCell = ArrayCell()
-    let countCell = 9_999_999
+    var countCell = 300000
     var start = DispatchTime.now()
     var end = DispatchTime.now()
     var checkTimer = false
     var checkCreateArray = false
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         collectionView.delegate = self
         self.collectionView.dataSource = self
-        
+        collectionView?.allowsMultipleSelection = true
     }
     
     
@@ -57,7 +57,6 @@ class ArrayCollectionViewController: UICollectionViewController {
         if checkTimer == false {
             timer()
         }
-        
         if indexPath.item == 0 {
             firstCell.firstLabelOutlet.text = result
             cell = firstCell
@@ -82,64 +81,88 @@ class ArrayCollectionViewController: UICollectionViewController {
         }
     }
     
-//    func startActivityIndicator (_ indexPath: IndexPath) {
-//        if checkTimer == false {
-//            timer()
-//        }
-//
-//        let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
-//        firstCell.activityIndicator.isHidden = false
-//        firstCell.firstLabelOutlet.isHidden = true
-//        collectionView.reloadData()
-//
-//    }
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        //        let otherCell = collectionView.cellForItem(at: indexPath) as? OtherCollectionViewCell
+        
+        let item = indexPath.item % arrayCell.arrayName.count
+        print(indexPath.item)
         start = DispatchTime.now()
-        if indexPath.item == 0 && checkCreateArray == false {
+        if item == 0 && checkCreateArray == false {
             checkTimer = false
-            createArray() {
+            createArray(indexPath) {
                 collectionView.reloadData()
                 self.checkCreateArray = false
+                print(self.array.count)
+            }
+        } else if item == 1 {
+            insertElementsBeginningOneByOne {
+                collectionView.reloadData()
+                self.checkCreateArray = false
+                print(self.array.count)
             }
         }
     }
     
-    
-    func createArray (completion: @escaping () -> Void) {
-        checkCreateArray = true
-        let countArray = countCell/arrayCell.arrayName.count
-        let modulo = countCell % arrayCell.arrayName.count
-        let queue = DispatchQueue.global(qos: .background)
-        queue.async {
-            if modulo == 0 {
+    func createArray (_ indexPath: IndexPath, completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            array.removeAll()
+            countCell = 300000
+            var countArray = countCell/arrayCell.arrayName.count
+            let modulo = countCell % arrayCell.arrayName.count
+            let queue = DispatchQueue.global(qos: .background)
+            if modulo != 0 {
+                countArray += 1
+            }
+            queue.async {
                 for _ in 1...countArray {
                     for i in self.arrayCell.arrayName {
                         if self.array.count == 0 {
                             self.array.append("")
                             self.array.append(i)
-                        } else if self.array.count != self.countCell + 1 {
+                        } else if self.array.count <= self.countCell {
                             self.array.append(i)
+                        } else {
+                            break
                         }
                     }
                 }
-            } else {
-                for _ in 1...countArray + 1 {
-                    for i in self.arrayCell.arrayName {
-                        if self.array.isEmpty {
-                            self.array.append("")
-                            self.array.append(i)
-                        } else if self.array.count != self.countCell + 1 {
-                            self.array.append(i)
-                        }
-                    }
+                DispatchQueue.main.async {
+                    completion()
                 }
-            }
-            DispatchQueue.main.async {
-                completion()
             }
         }
+    }
+    
+    func insertElementsBeginningOneByOne (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            countCell += 1000
+            var insertPoint = 1
+            var countArray = 1000/arrayCell.arrayName.count
+            let modulo = 1000 % arrayCell.arrayName.count
+            if modulo != 0 {
+                countArray += 1
+            }
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                for _ in 1...countArray {
+                    for i in self.arrayCell.arrayName {
+                        if self.array.count <= self.countCell {
+                            self.array.insert(i, at: insertPoint)
+                            insertPoint += 1
+                        } else {
+                            break
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+        
     }
 }
 
@@ -153,18 +176,6 @@ extension ArrayCollectionViewController: UICollectionViewDelegateFlowLayout {
         } else {
             return CGSize(width: widthPerItem, height: 80)
         }
-//        var cellSize = CGSize()
-//        if indexPath.item == 0 {
-//            cellSize = CGSize(width: collectionView.frame.width, height: 80)
-//        } else if indexPath.item <= 1000 {
-//            cellSize = CGSize(width: widthPerItem, height: 80)
-//        } else {
-//            let queue = DispatchQueue.global(qos: .background)
-//            queue.async {
-//                    cellSize = CGSize(width: widthPerItem, height: 80)
-//            }
-//        }
-//        return cellSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

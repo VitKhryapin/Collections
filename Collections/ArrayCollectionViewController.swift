@@ -12,21 +12,21 @@ class ArrayCollectionViewController: UICollectionViewController {
     let idCell = "cell"
     let itemsPerRow: CGFloat = 2
     let sectionInserts = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    var result: String = "Create Int array with 10_000_000 elements"
+    var resultFirstCell: String = "Create Int array with 10_000_000 elements"
+    var resultOtherCell  = ""
     var array: Array<Any> = []
     var arrayCell: ArrayCell = ArrayCell()
-    var countCell = 300000
-    var start = DispatchTime.now()
-    var end = DispatchTime.now()
-    var checkTimer = false
+    var countCell = 2014
+    var countCellArray = 0
     var checkCreateArray = false
-    
-    
+    var timer = Timer()
+    var elapsed = 0.0
+    var result = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
         collectionView.delegate = self
-        self.collectionView.dataSource = self
+        collectionView.dataSource = self
         collectionView?.allowsMultipleSelection = true
     }
     
@@ -52,54 +52,127 @@ class ArrayCollectionViewController: UICollectionViewController {
         var cell = UICollectionViewCell()
         firstCell.layer.borderWidth = 0.5
         otherCell.layer.borderWidth = 0.5
-        end = DispatchTime.now()
         
-        if checkTimer == false {
-            timer()
-        }
         if indexPath.item == 0 {
-            firstCell.firstLabelOutlet.text = result
+            firstCell.firstLabelOutlet.text = resultFirstCell
             cell = firstCell
         } else {
-            otherCell.otherLabel.text  = "\(array[indexPath.item])"
+            otherCell.otherLabel.text = "\(array[indexPath.item])"
             cell = otherCell
         }
         return cell
     }
     
     
-    
-    func timer () -> String {
-        if array.count != 0 {
-            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
-            let timeInterval = Double(nanoTime) / 1_000_000_000
-            result = String(format: "Array creation time %.3f ms.", timeInterval)
-            checkTimer = true
-            return result
-        } else {
-            return result
+    func startTimer() -> String {
+        timer.invalidate()
+        self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.updateTime), userInfo: NSDate(), repeats: true)
+        RunLoop.current.add(timer, forMode: .common)
+        return result
+    }
+    @objc func updateTime() -> String {
+        let queue = DispatchQueue.global(qos: .background)
+        queue.sync {
+            self.elapsed = -(self.timer.userInfo as! NSDate).timeIntervalSinceNow
+            DispatchQueue.main.async {
+                self.result = String(format: "%.3f ms.", self.elapsed)
+            }
         }
+        return result
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-        //        let otherCell = collectionView.cellForItem(at: indexPath) as? OtherCollectionViewCell
-        
         let item = indexPath.item % arrayCell.arrayName.count
-        print(indexPath.item)
-        start = DispatchTime.now()
-        if item == 0 && checkCreateArray == false {
-            checkTimer = false
+        if item == 0  {
+            startTimer()
             createArray(indexPath) {
                 collectionView.reloadData()
+                self.resultFirstCell = "Array creation time: \(self.result)"
+                self.array[indexPath.item] = self.resultFirstCell
                 self.checkCreateArray = false
                 print(self.array.count)
             }
-        } else if item == 1 {
-            insertElementsBeginningOneByOne {
-                collectionView.reloadData()
-                self.checkCreateArray = false
-                print(self.array.count)
+        } else {
+            switch "\(array[indexPath.item])" {
+            case "Insert 1000 elements at the beginning of the array one-by-one":
+                startTimer()
+                insertElementsBeginningOneByOne {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Insert 1000 elements at the beginning of the array":
+                startTimer()
+                insertElementsBeginningAtOnce {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Insert 1000 elements in the middle of the array one-by-one":
+                startTimer()
+                insertElementsMiddleOneByOne {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Insert 1000 elements in the middle of the array":
+                startTimer()
+                insertElementsMiddleAtOnce {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Insert 1000 elements at the end of the array one-by-one":
+                startTimer()
+                insertElementsEndOneByOne {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Insert 1000 elements at the end of the array":
+                startTimer()
+                insertElementsEndAtOnce {
+                    collectionView.reloadData()
+                    self.resultOtherCell = "Insertion time: \(self.result)"
+                    self.array[indexPath.item] = self.resultOtherCell
+                    self.checkCreateArray = false
+                    print(self.array.count)
+                }
+            case "Remove 1000 elements at the beginning of the array one-by-one":
+                    startTimer()
+                    removeElementsBeginningOneByOne {
+                        collectionView.reloadData()
+                        self.resultOtherCell = "Remove time: \(self.result)"
+                        if indexPath.item > 7 {
+                            self.array[indexPath.item] = self.resultOtherCell
+                        }
+                        self.checkCreateArray = false
+                        print(self.array.count)
+                    }
+//            case "Remove 1000 elements at the beginning of the array":
+//                startTimer()
+//                removeElementsBeginningOnce {
+//                    collectionView.reloadData()
+//                    self.resultOtherCell = "Remove time: \(self.result)"
+//                    if indexPath.item > 7 {
+//                        self.array[indexPath.item] = self.resultOtherCell
+//                    }
+//                    self.checkCreateArray = false
+//                    print(self.array.count)
+//                }
+            default:
+                break
             }
         }
     }
@@ -108,9 +181,9 @@ class ArrayCollectionViewController: UICollectionViewController {
         if checkCreateArray == false {
             checkCreateArray = true
             array.removeAll()
-            countCell = 300000
-            var countArray = countCell/arrayCell.arrayName.count
-            let modulo = countCell % arrayCell.arrayName.count
+            countCellArray = countCell
+            var countArray = countCellArray/arrayCell.arrayName.count
+            let modulo = countCellArray % arrayCell.arrayName.count
             let queue = DispatchQueue.global(qos: .background)
             if modulo != 0 {
                 countArray += 1
@@ -121,7 +194,7 @@ class ArrayCollectionViewController: UICollectionViewController {
                         if self.array.count == 0 {
                             self.array.append("")
                             self.array.append(i)
-                        } else if self.array.count <= self.countCell {
+                        } else if self.array.count <= self.countCellArray {
                             self.array.append(i)
                         } else {
                             break
@@ -138,7 +211,7 @@ class ArrayCollectionViewController: UICollectionViewController {
     func insertElementsBeginningOneByOne (completion: @escaping () -> Void) {
         if checkCreateArray == false {
             checkCreateArray = true
-            countCell += 1000
+            countCellArray += 1000
             var insertPoint = 1
             var countArray = 1000/arrayCell.arrayName.count
             let modulo = 1000 % arrayCell.arrayName.count
@@ -149,7 +222,7 @@ class ArrayCollectionViewController: UICollectionViewController {
             queue.async {
                 for _ in 1...countArray {
                     for i in self.arrayCell.arrayName {
-                        if self.array.count <= self.countCell {
+                        if self.array.count <= self.countCellArray {
                             self.array.insert(i, at: insertPoint)
                             insertPoint += 1
                         } else {
@@ -162,9 +235,155 @@ class ArrayCollectionViewController: UICollectionViewController {
                 }
             }
         }
-        
+    }
+    
+    func insertElementsBeginningAtOnce (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            countCellArray += 1000
+            let insertPoint = 1
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                self.array.insert(contentsOf: self.array[1...1000], at: insertPoint)
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func insertElementsMiddleOneByOne (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            var insertPoint = countCellArray/2
+            countCellArray += 1000
+            var countArray = 1000/arrayCell.arrayName.count
+            let modulo = 1000 % arrayCell.arrayName.count
+            if modulo != 0 {
+                countArray += 1
+            }
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                for _ in 1...countArray {
+                    for i in self.arrayCell.arrayName {
+                        if self.array.count <= self.countCellArray {
+                            self.array.insert(i, at: insertPoint)
+                            insertPoint += 1
+                        } else {
+                            break
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func insertElementsMiddleAtOnce (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            var insertPoint = countCellArray/2
+            countCellArray += 1000
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                self.array.insert(contentsOf: self.array[1...1000], at: insertPoint)
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func insertElementsEndOneByOne (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            countCellArray += 1000
+            var countArray = 1000/arrayCell.arrayName.count
+            let modulo = 1000 % arrayCell.arrayName.count
+            if modulo != 0 {
+                countArray += 1
+            }
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                for _ in 1...countArray {
+                    for i in self.arrayCell.arrayName {
+                        if self.array.count <= self.countCellArray {
+                            self.array.insert(i, at: self.array.count)
+                        } else {
+                            break
+                        }
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func insertElementsEndAtOnce (completion: @escaping () -> Void) {
+        if checkCreateArray == false {
+            checkCreateArray = true
+            countCellArray += 1000
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                self.array.insert(contentsOf: self.array[1...1000], at: self.array.count)
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func removeElementsBeginningOneByOne (completion: @escaping () -> Void) {
+        if checkCreateArray == false && array.count > 1001 {
+            checkCreateArray = true
+            countCellArray -= 1000
+            var insertPoint = 1001
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                for _ in 1...1000 {
+                    if self.array.count >= self.countCellArray {
+                        self.array.remove(at: insertPoint)
+                        insertPoint -= 1
+                    } else {
+                        break
+                    }
+                }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        } else {
+            array.removeAll()
+            collectionView.reloadData()
+        }
+    }
+    func removeElementsBeginningOnce (completion: @escaping () -> Void) {
+        if checkCreateArray == false && array.count > 1001 {
+            checkCreateArray = true
+            countCellArray -= 1000
+            var insertPoint = 1001
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                    if self.array.count >= self.countCellArray {
+                        //self.array.remove(at: 1000)
+                        self.array.removeFirst(1000)
+                        insertPoint -= 1
+                    }
+                DispatchQueue.main.async {
+                    completion()
+                }
+            }
+        } else {
+            array.removeAll()
+            collectionView.reloadData()
+        }
     }
 }
+
 
 extension ArrayCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -192,24 +411,22 @@ extension ArrayCollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 
-//    func startTimer() {
-//
-//        timer?.invalidate()
-//
-//            self.timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.updateTime), userInfo: NSDate(), repeats: true)
-//        RunLoop.current.add(timer!, forMode: .common)
-//        //queue.async {
-//
-//    }
-//    @objc func updateTime() -> String {
-////        let queue = DispatchQueue.global(qos: .userInteractive)
-////        queue.sync {
-//            self.elapsed = -(self.timer?.userInfo as! NSDate).timeIntervalSinceNow
-////            DispatchQueue.main.async {
-//                self.result = String(format: "Array creation time %.3f ms.", self.elapsed)
-//        print ("tik")
-////            }
-////        }
-//        return result
-//    }
 
+//    func timer (_ indexPath: IndexPath) -> String {
+//        let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath) as! FirstCollectionViewCell
+//        let otherCell = collectionView.dequeueReusableCell(withReuseIdentifier: "OtherCollectionViewCell", for: indexPath) as! OtherCollectionViewCell
+//
+//        if indexPath.item == 0 && array.count != 0 {
+//            let nanoTime = firstCell.end.uptimeNanoseconds - firstCell.start.uptimeNanoseconds
+//            let timeInterval = Double(nanoTime) / 1_000_000_000
+//            resultFirstCell = String(format: "Array creation time %.3f ms.", timeInterval)
+//            checkTimer = true
+//            return resultFirstCell
+//        } else {
+//            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds
+//            let timeInterval = Double(nanoTime) / 1_000_000_000
+//            resultOtherCell = String(format: "Insert %.3f ms.", timeInterval)
+//            checkTimer = true
+//            return resultOtherCell
+//        }
+//    }

@@ -10,7 +10,6 @@ import UIKit
 class OtherCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var otherLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     override var isSelected: Bool {
         willSet(newValue) {
             if newValue {
@@ -18,6 +17,7 @@ class OtherCollectionViewCell: UICollectionViewCell {
                 activityIndicator.isHidden = false
                 activityIndicator.startAnimating()
                 otherLabel.isHidden = true
+                
             } else {
                 backgroundColor = .systemGray6
                 activityIndicator.isHidden = true
@@ -25,9 +25,6 @@ class OtherCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-    
-    
-
     
     override func prepareForReuse() {
         super.prepareForReuse()

@@ -10,16 +10,14 @@ import UIKit
 class FirstCollectionViewCell: UICollectionViewCell {
    
     @IBOutlet weak var firstLabelOutlet: UILabel!
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     override var isSelected: Bool {
         willSet(newValue) {
             if newValue {
                 firstLabelOutlet.isHidden = true
                 activityIndicator.isHidden = false
                 activityIndicator.startAnimating()
-//                backgroundColor = .systemGray4
+//              backgroundColor = .systemGray4
             } else {
                 firstLabelOutlet.isHidden = false
                 activityIndicator.isHidden = true
@@ -32,6 +30,4 @@ class FirstCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         isSelected = false
     }
-    
-    
 }

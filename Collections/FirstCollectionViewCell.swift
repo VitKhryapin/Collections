@@ -17,11 +17,11 @@ class FirstCollectionViewCell: UICollectionViewCell {
                 firstLabelOutlet.isHidden = true
                 activityIndicator.isHidden = false
                 activityIndicator.startAnimating()
-//              backgroundColor = .systemGray4
+              backgroundColor = .systemGray4
             } else {
                 firstLabelOutlet.isHidden = false
                 activityIndicator.isHidden = true
-                backgroundColor = .systemGray4
+                backgroundColor = .systemGray6
             }
         }
     }

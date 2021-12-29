@@ -75,7 +75,7 @@ class ArrayCollectionViewController: UICollectionViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         if self.isMovingFromParent {
             checkCreateArray = false
         }
@@ -228,7 +228,7 @@ class ArrayCollectionViewController: UICollectionViewController {
         countCellArray = countCell
         queue.async {
             for i in 0...self.countCellArray - 1 where self.checkCreateArray == true {
-                    self.array.append(i)
+                self.array.append(i)
             }
             if self.array.count == self.countCellArray {
                 DispatchQueue.main.async {

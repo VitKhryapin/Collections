@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--Collections-->
         <scene sceneID="Atg-wn-zSF">
             <objects>
-                <tableViewController restorationIdentifier="CollectionsTableViewController" storyboardIdentifier="CollectionsTableViewController" id="az5-JU-FTm" customClass="CollectionsTableViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="az5-JU-FTm" customClass="CollectionsTableViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BSi-0m-Szw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,6 +37,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="384.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="r9K-Js-SNx" kind="show" identifier="SetViewController" id="Jub-t8-JH8"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="5II-rb-1XC">
                                         <rect key="frame" x="0.0" y="111.5" width="414" height="43.5"/>
@@ -58,6 +62,116 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cDl-nb-neo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2234.7826086956525" y="137.94642857142856"/>
+        </scene>
+        <!--Set-->
+        <scene sceneID="MrD-27-RZi">
+            <objects>
+                <viewController storyboardIdentifier="SetViewController" id="r9K-Js-SNx" customClass="SetViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jGU-YR-ii8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="38" translatesAutoresizingMaskIntoConstraints="NO" id="A0o-xv-AmR">
+                                <rect key="frame" x="38" y="125" width="338" height="106"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tl1-Ii-zp4">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="changedFirstTF:" destination="r9K-Js-SNx" eventType="editingChanged" id="BZU-WY-KHo"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yvI-FP-xyq">
+                                        <rect key="frame" x="0.0" y="72" width="338" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="changedSecondTF:" destination="r9K-Js-SNx" eventType="editingChanged" id="AsS-Un-FPw"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zdc-z7-FMe">
+                                <rect key="frame" x="38" y="259" width="338" height="278.5"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5u8-7b-U9x">
+                                        <rect key="frame" x="102.5" y="0.0" width="133" height="30"/>
+                                        <state key="normal" title="All matching letters"/>
+                                        <connections>
+                                            <action selector="allMatchesAction:" destination="r9K-Js-SNx" eventType="touchUpInside" id="cox-Au-KEM"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMx-AF-t2S">
+                                        <rect key="frame" x="144" y="38" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3l-Ai-4ZB">
+                                        <rect key="frame" x="59" y="96" width="220" height="30"/>
+                                        <state key="normal" title="All characters that do not match"/>
+                                        <connections>
+                                            <action selector="allCharectersAction:" destination="r9K-Js-SNx" eventType="touchUpInside" id="61U-mb-74V"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iaq-f9-1oV">
+                                        <rect key="frame" x="144" y="134" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Auc-pB-WNO">
+                                        <rect key="frame" x="0.0" y="192" width="338" height="28.5"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="All unique characters from the first text field that do not match in text fields">
+                                                    <attributes>
+                                                        <font key="NSFont" metaFont="system" size="15"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="uniqCharactersAction:" destination="r9K-Js-SNx" eventType="touchUpInside" id="IIJ-FO-Bu0"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6D5-0P-eCS">
+                                        <rect key="frame" x="144" y="228.5" width="50" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pQe-SS-1Qi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A0o-xv-AmR" firstAttribute="top" secondItem="pQe-SS-1Qi" secondAttribute="top" constant="37" id="7eN-jG-FeR"/>
+                            <constraint firstItem="pQe-SS-1Qi" firstAttribute="trailing" secondItem="zdc-z7-FMe" secondAttribute="trailing" constant="38" id="etu-7b-4o8"/>
+                            <constraint firstItem="zdc-z7-FMe" firstAttribute="leading" secondItem="pQe-SS-1Qi" secondAttribute="leading" constant="38" id="iE1-5P-WqQ"/>
+                            <constraint firstItem="pQe-SS-1Qi" firstAttribute="trailing" secondItem="A0o-xv-AmR" secondAttribute="trailing" constant="38" id="ifi-Ap-GKz"/>
+                            <constraint firstItem="zdc-z7-FMe" firstAttribute="top" secondItem="A0o-xv-AmR" secondAttribute="bottom" constant="28" id="u3z-1L-kJ7"/>
+                            <constraint firstItem="A0o-xv-AmR" firstAttribute="leading" secondItem="pQe-SS-1Qi" secondAttribute="leading" constant="38" id="zDs-RB-YRa"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set" id="AaF-3K-fjN"/>
+                    <connections>
+                        <outlet property="allDoNotMatchesButtonOutlet" destination="n3l-Ai-4ZB" id="DMw-tM-OaS"/>
+                        <outlet property="allMatchesButtonOutlet" destination="5u8-7b-U9x" id="Ui1-YP-GRZ"/>
+                        <outlet property="exceptionTF" destination="yvI-FP-xyq" id="OYx-cw-j1p"/>
+                        <outlet property="firstResult" destination="pMx-AF-t2S" id="6vz-uD-Un3"/>
+                        <outlet property="inputTF" destination="Tl1-Ii-zp4" id="74Z-In-XWC"/>
+                        <outlet property="secondResult" destination="Iaq-f9-1oV" id="TTg-j9-pki"/>
+                        <outlet property="thirdResult" destination="6D5-0P-eCS" id="Epw-89-1ia"/>
+                        <outlet property="uniqCharactersButtonOutlet" destination="Auc-pB-WNO" id="8b5-Hp-5CB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5EY-sc-eiL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3038" y="869"/>
         </scene>
         <!--Array-->
         <scene sceneID="TMf-av-VER">

@@ -11,11 +11,6 @@ class CollectionsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationController?.navigationBar.prefersLargeTitles = true
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableFooterView = UIView()
@@ -55,9 +50,6 @@ class CollectionsTableViewController: UITableViewController {
             cell.textLabel?.text = "Dictionary"
             cell.accessoryType = .disclosureIndicator
         }
-         
-
-        // Configure the cell...
 
         return cell
     }
@@ -70,8 +62,11 @@ class CollectionsTableViewController: UITableViewController {
             if indexPath.row == 0 {
                 let arrayVC = storyboard?.instantiateViewController(identifier: "ArrayCollectionViewController") as! ArrayCollectionViewController
                 self.navigationController?.pushViewController(arrayVC, animated: true)
+            } else if indexPath.row == 1 {
+                let arrayVC = storyboard?.instantiateViewController(identifier: "SetViewController") as! SetViewController
+                self.navigationController?.pushViewController(arrayVC, animated: true)
             } else {
-                print("\(indexPath.row)")
+                print(indexPath.row)
             }
         }
     

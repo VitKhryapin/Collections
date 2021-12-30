@@ -31,26 +31,14 @@ class SetViewController: UIViewController {
     func selectedAllMatches () {
         guard let inputString: String = inputTF.text else { return }
         guard let exceptionString: String = exceptionTF.text  else { return }
-        let exceptionCharacters = exceptionString.compactMap{$0}
-        let inputCharacters = inputString.compactMap{$0}
-        let matchingCharacters = inputCharacters
-            .filter{exceptionCharacters.contains($0)}
-            .compactMap{$0}
-        firstResult.text = "\(String(Set(matchingCharacters)))"
+        let exceptionCharacters = Set(exceptionString.compactMap{$0})
+        let inputCharacters = Set(inputString.compactMap{$0})
+        var result = Set <Character>()
+        result = inputCharacters.intersection(exceptionCharacters)
+        firstResult.text = String(result)
     }
     
     func selectedDoNotMatches () {
-        guard let inputString: String = inputTF.text else { return }
-        guard let exceptionString: String = exceptionTF.text  else { return }
-        let exceptionCharacters = exceptionString.compactMap{$0}
-        let inputCharacters = inputString.compactMap{$0}
-        let notMatchingCharacters = inputCharacters
-            .filter{!exceptionCharacters.contains($0)}
-            .compactMap{$0}
-        secondResult.text = "\(String(Set(notMatchingCharacters)))"
-    }
-    
-    func selectedAllDoNotMatches () {
         guard let inputString: String = inputTF.text else { return }
         guard let exceptionString: String = exceptionTF.text  else { return }
         let exceptionCharacters = exceptionString.compactMap{$0}
@@ -61,8 +49,20 @@ class SetViewController: UIViewController {
         let notMatchingWithExceptionCharacters = exceptionCharacters
             .filter{!inputCharacters.contains($0)}
             .compactMap{$0}
-        thirdResult.text = "\(String(Set(notMatchingWithInpuCharacters + notMatchingWithExceptionCharacters)))"
+        secondResult.text = "\(String(Set(notMatchingWithInpuCharacters + notMatchingWithExceptionCharacters)))"
     }
+    
+    func selectedAllDoNotMatches () {
+        guard let inputString: String = inputTF.text else { return }
+        guard let exceptionString: String = exceptionTF.text  else { return }
+        let exceptionCharacters = Set(exceptionString.compactMap{$0})
+        let inputCharacters = Set(inputString.compactMap{$0})
+        var result = Set <Character>()
+        result = inputCharacters.subtracting(exceptionCharacters)
+        thirdResult.text = String(result)
+    }
+    
+    
     
     @IBAction func changedFirstTF(_ sender: UITextField) {
         if let lastSymbol = sender.text?.last {

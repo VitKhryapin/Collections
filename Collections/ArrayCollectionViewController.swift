@@ -9,7 +9,6 @@ import UIKit
 
 
 class ArrayCollectionViewController: UICollectionViewController {
-    let idCell = "cell"
     let itemsPerRow: CGFloat = 2
     let sectionInserts = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     var resultFirstCell: String = "Create Int array with 10_000_000 elements"
@@ -29,8 +28,6 @@ class ArrayCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
-        collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView?.allowsMultipleSelection = true
         arrayNameCell = arrayCell.arrayName
     }

@@ -22,6 +22,15 @@ class SetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        identifier()
+    }
+    
+    func identifier () {
+        inputTF.accessibilityIdentifier = "inputTF"
+        exceptionTF.accessibilityIdentifier = "exceptionTF"
+        firstResult.accessibilityIdentifier = "firstResult"
+        secondResult.accessibilityIdentifier = "secondResult"
+        thirdResult.accessibilityIdentifier = "thirdResult"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

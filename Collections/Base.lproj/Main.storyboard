@@ -12,7 +12,7 @@
         <!--Collections-->
         <scene sceneID="Atg-wn-zSF">
             <objects>
-                <tableViewController id="az5-JU-FTm" customClass="CollectionsTableViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CollectionsTableViewController" id="az5-JU-FTm" customClass="CollectionsTableViewController" customModule="Collections" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="BSi-0m-Szw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

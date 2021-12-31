@@ -15,7 +15,7 @@ class DictionaryCollectionViewController: UICollectionViewController {
     let queue = DispatchQueue.global(qos: .utility)
     var array: ArrayName = ArrayName()
     var dictionary: Dictionary <String, String> = [:]
-    let count = 10_000_000
+    var count = 10_000_000
     var checkCreate = false
     var startTimer = DispatchTime.now()
     var endTimer = DispatchTime.now()
@@ -34,6 +34,7 @@ class DictionaryCollectionViewController: UICollectionViewController {
         collectionView?.allowsMultipleSelection = true
         create {
             self.collectionView.reloadData()
+            self.checkCreate = false
         }
         
         
